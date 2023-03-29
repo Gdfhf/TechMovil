@@ -1,0 +1,24 @@
+<h1>Agregar Proveedor</h1>
+<div *ngIf="msgAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>¡Error!</strong> {{msgText}}
+    <button type="button" (click)="cerrarAlert()" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="mb-3">
+    <h2>Artículos</h2>
+    <label for="lblCodigo" class="form-label">Código:</label>
+    <input [(ngModel)]="proveedorSeleccionado.CodigoProveedor" type="number" id="1" name="txtCodigo" class="form-control">
+    <label for="lblCodigo" class="form-label">Razon Social:</label>
+    <input [(ngModel)]="proveedorSeleccionado.RazonSocial" type="text" id="2" name="txtRazonSocial" class="form-control">
+    <label for="lblCodigo" class="form-label">RFC:</label>
+    <input [(ngModel)]="proveedorSeleccionado.Rfc" type="text" id="3" name="txtRfc" class="form-control">
+    <label for="lblCodigo" class="form-label">Dirección:</label>
+    <input [(ngModel)]="proveedorSeleccionado.Direccion" type="text" id="4" name="txtDireccion" class="form-control">
+    <label for="lblCodigo" class="form-label">Email:</label>
+    <input [(ngModel)]="proveedorSeleccionado.Email" type="text" id="5" name="txtEmail" class="form-control">
+
+    <button class="btn btn-primary" (click)="agregarProveedor()" style="margin-left: 10px; margin-top: 20px;" *ngIf="status=='agregar'">  Agregar  </button>
+    <button class="btn btn-primary" (click)="modificarProveedor()" style="margin-left: 10px; margin-top: 20px;" *ngIf="status=='modificar'">  Modificar  </button>
+    <button class="btn btn-secondary" (click)="regresar()" style="margin-left: 10px; margin-top: 20px;">  Regresar  </button>
+    <!--button class="btn btn-secondary" a routerLink"=/articulos" (click)="modificarArticulo()" style="margin-left: 10px; margin-top: 20px;">  Regresar  </button-->
+</div>

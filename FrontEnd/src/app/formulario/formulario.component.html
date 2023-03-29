@@ -1,0 +1,20 @@
+<h1>Agregar Articulo</h1>
+<div *ngIf="msgAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>¡Error!</strong> {{msgText}}
+    <button type="button" (click)="cerrarAlert()" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="mb-3">
+    <h2>Artículos</h2>
+    <label for="lblCodigo" class="form-label">Código:</label>
+    <input [(ngModel)]="articuloSeleccionado.Codigo" type="number" id="1" name="txtCodigo" class="form-control">
+    <label for="lblCodigo" class="form-label">Descripción:</label>
+    <input [(ngModel)]="articuloSeleccionado.Descripcion" type="text" id="2" name="txtDescripcion" class="form-control">
+    <label for="lblCodigo" class="form-label">Precio:</label>
+    <input [(ngModel)]="articuloSeleccionado.Precio" type="number" id="3" name="txtPrecio" class="form-control">
+
+    <button class="btn btn-primary" (click)="agregarArticulo()" style="margin-left: 10px; margin-top: 20px;" *ngIf="status=='agregar'">  Agregar  </button>
+    <button class="btn btn-primary" (click)="modificarArticulo()" style="margin-left: 10px; margin-top: 20px;" *ngIf="status=='modificar'">  Modificar  </button>
+    <button class="btn btn-secondary" (click)="regresar()" style="margin-left: 10px; margin-top: 20px;">  Regresar  </button>
+    <!--button class="btn btn-secondary" a routerLink"=/articulos" (click)="modificarArticulo()" style="margin-left: 10px; margin-top: 20px;">  Regresar  </button-->
+</div>

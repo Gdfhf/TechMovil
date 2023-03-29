@@ -1,0 +1,98 @@
+/*
+	Color fondo: #632432;
+	Color header: 246355;
+	Color borde: 0F362D;
+	Color iluminado: 369681;
+
+
+*{
+    font-family:'Segoe UI';  
+    font-size: 16px;
+}
+body{
+	background-color: #f4f4f4;
+}
+
+h1{
+    font-size: 24px;
+    color: #5991f1;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+p{
+    font-weight: bold;
+    color: #5991f1;
+    padding: 8px;
+}
+
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 50%;
+    margin-left: 100px;
+}
+
+th, td{
+	padding: 20px;
+}
+
+
+tr:nth-child(even){
+	background-color: rgb(238, 238, 243);
+}
+.Encabezado{
+    background-color: #5991f1;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+button{
+    text-decoration: none;
+    display:inline-block;
+    padding: 8px;;
+    border: none;
+    border-radius:15px;
+    text-decoration: none;
+    color:#5991f1;
+    transition: all 0.1s;
+    text-align: center;
+    background-color: transparent;
+}
+
+button:hover{
+    background:#5991f1;
+    color:white;
+    cursor: pointer;
+}
+
+.btnForm{
+    background:#5991f1;
+    color:white;
+    cursor: pointer;
+    margin: 10px;
+    font-weight:bold ;
+}
+
+.Formulario{
+    float: right;
+    margin-right: 180px;
+    margin-top: -400px;
+}
+
+input{
+    border: 1px solid #babbbd;
+    border-radius: 5px 5px 5px 5px;
+    color: #393939;
+    font-size: 16px;
+    padding: 6px;
+}
+
+
+/*tr:hover td{
+	background-color: #369681;
+	color: white;
+}*/
+

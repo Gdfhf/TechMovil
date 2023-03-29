@@ -1,0 +1,22 @@
+<h1> Práctica 2 </h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Borrar</th>
+            <th>Seleccionar</th>
+        </tr>  
+    </thead>
+    <tbody>
+        <tr *ngFor="let articulo of articulos">
+            <td>{{articulo.Codigo}}</td>
+            <td>{{articulo.Descripcion}}</td>
+            <td>{{articulo.Precio}}</td>
+            <td><button (click)="borrarArticulo(articulo)" class="btn btn-danger" >Borrar?</button></td>
+            <td><button (click)="seleccionarArticulo(articulo)" class="btn btn-primary">Seleccionar</button></td>
+        </tr>
+    </tbody>
+</table>
