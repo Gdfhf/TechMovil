@@ -1,6 +1,7 @@
 const { Router } = require("express")
-const { models } = require("../db/index")
+const { models, sequelize } = require("../db/index")
 const router = Router();
+const { Sequelize } = require ("sequelize");
 
 //Raiz
 router.get('/', async(req, res) =>{
@@ -15,9 +16,7 @@ router.get('/', async(req, res) =>{
 
 router.get("/:id", async(req, res)=>{
     try{
-        const {id} = req.params;
-        console.log("=====",id,"====");
-        let producto = await models.productos.findByPk(id);
+        let producto = await sequelize.query(`SELECT * FROM productos WHERE Codigo = ${id}`)
         res.json(producto);
     }catch(error){
         console.log(error)
@@ -45,7 +44,7 @@ router.put("/:id", async(req, res) => {
 
         //Modifica los datos mediante update
         const update = await models.productos.update(body, {
-            where: {Id : id}
+            where: {codigo : id}
         });
         //Busca el producto por la id
         let product = await models.productos.findByPk(id);

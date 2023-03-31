@@ -26,7 +26,6 @@ export class TablaComponent {
   ngOnInit() :void {
     //this.articulos = this.articuloService.returnData(); Como se hacia sin el observable
     this.articuloService.returnData().subscribe( (data) => {
-      console.log(data);
       this.articulos = data;
     });
   }

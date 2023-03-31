@@ -13,7 +13,7 @@ export class FormularioProveedoresComponent {
   @Input() proveedorSeleccionado: Proveedor ={
     Id:0, CodigoProveedor: 0, RazonSocial: "", Rfc: "", Direccion: "", Email: ""
   }
-  
+
   constructor(private proveedorService : ProveedorService,
               private activedRoute: ActivatedRoute,
               private router: Router){

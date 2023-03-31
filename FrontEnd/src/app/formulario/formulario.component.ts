@@ -15,25 +15,36 @@ export class FormularioComponent {
     Codigo: 0, Descripcion: "", Precio: 0
   }
 
+  articuloMod: Articulo = {
+    ...this.articuloSeleccionado
+  }
+
+
+
   constructor(private articuloService : ArticulosService,
               private activedRoute: ActivatedRoute,
               private router: Router){
               }
-              
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.activedRoute.params.subscribe(params => {
-      console.log(params);
       const id: number = params["id"];
       this.status = id == undefined ? "agregar" : "modificar";
       this.articuloSeleccionado = id == undefined ?
                                         //Si es undefined
                                         this.articuloSeleccionado:
-                                        //Si no es undefined.
-                                        this.articuloService.seleccionarArticulo(id);
+                                        this.articuloSeleccionado = {
+                                          ...this.articuloService.seleccionar(id)
+                                        }
+                                        this.articuloMod = {
+                                          ...this.articuloSeleccionado
+                                        }
     });
   }
+
+
 
   msgAlert:Boolean = false;
   msgText: string = "";
@@ -57,7 +68,6 @@ export class FormularioComponent {
     });
 
     this.articuloService.agregarArticulo( {...this.articuloSeleccionado }).subscribe(data => {
-      console.log(data);
       Swal.fire(
         'Producto Agregado',
         '¡Se agregó el articulo correctamente!',
@@ -83,7 +93,7 @@ export class FormularioComponent {
   modificarArticulo(){
     Swal.fire({
       title: '¿Está seguro de modificar el articulo?',
-      text: "De '"  + this.articuloService.seleccionarArticulo(this.articuloSeleccionado.Codigo).Descripcion + "' a: '" +this.articuloSeleccionado.Descripcion +"'",
+      text: "De '"  + this.articuloService.seleccionar(this.articuloSeleccionado.Codigo).Descripcion + "' a: '" +this.articuloSeleccionado.Descripcion +"'",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -91,7 +101,8 @@ export class FormularioComponent {
       confirmButtonText: 'Yes, modify it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.articuloService.modificarArticulo(this.articuloSeleccionado);
+          //console.log(this.articuloMod, this.articuloSeleccionado);
+          this.articuloService.modificarArticulo(this.articuloMod, this.articuloSeleccionado).subscribe(data => {console.log(data)});;
           this.limpiarCajas();
           this.regresar();
           /*

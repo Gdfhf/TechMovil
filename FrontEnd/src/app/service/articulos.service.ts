@@ -37,10 +37,13 @@ export class ArticulosService {
     return this.http.post(this.baseURL,body,{'headers': headers});
   }
 
-  seleccionarArticulo(codigo:number){
-    //Modificar la logica creo
-    return {...this.articulos.find(art => art.Codigo == codigo)!};
+  seleccionar(idProductos: number): Articulo {
+    this.returnData().subscribe(data => {
+      this.articulos = data
+    })
+    return { ...this.articulos.find(art => art.Codigo == idProductos)! };
   }
+
 
   //Considerar si este realmente se ocupa
   getIndex(articulo: Articulo): number {
@@ -56,10 +59,11 @@ export class ArticulosService {
     return index;
   }
 
-  modificarArticulo(articulo : Articulo){
+  modificarArticulo(articulo : Articulo, articuloMod: Articulo){
+    console.log(articulo,articuloMod);
     //Modificar la logica aqui
-    const index = this.getIndex(articulo);
-    this.articulos[index] = {...articulo}
+    const index = articulo.Codigo;
+    return this.http.put<Articulo>(this.baseURL+`/${index}`,articuloMod);
   }
 
   //Cambiar la logica
