@@ -49,7 +49,7 @@ router.put("/:id", async(req, res) => {
         //Busca el producto por la id
         let product = await models.productos.findByPk(id);
         //Respuesta
-        res.json(product);
+        res.json(update);
     }catch(error){
         console.log(error)
     }

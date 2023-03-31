@@ -14,6 +14,10 @@ export class FormularioProveedoresComponent {
     Id:0, CodigoProveedor: 0, RazonSocial: "", Rfc: "", Direccion: "", Email: ""
   }
 
+  proveedorMod: Proveedor = {
+    ...this.proveedorSeleccionado
+  }
+
   constructor(private proveedorService : ProveedorService,
               private activedRoute: ActivatedRoute,
               private router: Router){
@@ -29,11 +33,19 @@ export class FormularioProveedoresComponent {
         this.proveedorSeleccionado = id == undefined ?
                                           //Si es undefined
                                           this.proveedorSeleccionado:
-                                          //Si no es undefined.
-                                          data;
-      })
+                                          this.proveedorSeleccionado = {
+                                            ...data
+                                          }
+                                          this.proveedorMod = {
+                                            ...data
+                                          }
+      });
     });
+    // this.proveedorMod = {
+    //   ...this.proveedorSeleccionado
+    // }
   }
+
   msgAlert:Boolean = false;
   msgText: string = "";
   status:string = "";
@@ -70,7 +82,8 @@ export class FormularioProveedoresComponent {
       confirmButtonText: 'Yes, modify it!'
       }).then((result) => {
         if(result.isConfirmed) {
-          this.proveedorService.modificarArticulo(this.proveedorSeleccionado);
+          console.log(this.proveedorMod,this.proveedorSeleccionado);
+          this.proveedorService.modificarArticulo(this.proveedorMod, this.proveedorSeleccionado).subscribe(data => {console.log(data)});
           this.regresar();
         }
       })

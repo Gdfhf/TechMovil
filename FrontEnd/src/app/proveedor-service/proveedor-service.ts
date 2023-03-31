@@ -12,7 +12,7 @@ export class ProveedorService {
 
   proveedores : Proveedor[] = [];
 
-  proveedorURL: string = "http://localhost:3000/api/proveedores/";
+  proveedorURL: string = "http://localhost:3000/api/proveedores";
 
   constructor(private http : HttpClient) {
     //
@@ -41,7 +41,7 @@ export class ProveedorService {
   }
 
   seleccionarProveedor(id:number): Observable<Proveedor>{
-    return this.http.get<Proveedor>(this.proveedorURL+id);
+    return this.http.get<Proveedor>(this.proveedorURL+`/${id}`);
     //La vieja
     //return {...this.proveedores.find(prov => prov.Id == id)!}
   }
@@ -57,10 +57,10 @@ export class ProveedorService {
     return index;
   }
 
-  modificarArticulo(proveedor : Proveedor){
-    const headers = { 'Content-type': 'application/json' };
-    const body = JSON.stringify(proveedor);
-    return this.http.put<Proveedor>(this.proveedorURL, body, {'headers':headers});
+  modificarArticulo(proveedor : Proveedor, proveedorMod: Proveedor){
+    const index = proveedor.CodigoProveedor;
+    console.log(proveedor);
+    return this.http.put<Proveedor>(this.proveedorURL+`/${index}`,proveedorMod);
 
     //Modificar la logica creo
     //const index = this.getIndex(proveedor);

@@ -38,7 +38,7 @@ router.put("/:id", async(req,res)=>{
         const { id } = req.params;
         const { body } = req;
         const update = await models.proveedores.update(body, {
-            where: {Id: id}
+            where: {CodigoProveedor: id}
         });
         let proveedor = await models.proveedores.findByPk(id);
         res.json(proveedor);
