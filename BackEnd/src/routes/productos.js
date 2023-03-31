@@ -60,7 +60,7 @@ router.delete("/:id", async(req, res) => {
     try{
         const { id } = req.params;
         await models.productos.destroy({
-            where : { Id : id }
+            where : { Codigo : id }
         });
         res.json("Producto con id: "+ id + " se ha eliminado correctamente");
     }catch(error){

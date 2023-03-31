@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ArticulosService {
-  articulos: Articulo[] = [
-  ]
+  articulos: Articulo[] = [];
 
   baseURL:string = "http://localhost:3000/api/productos";
 
@@ -65,26 +64,9 @@ export class ArticulosService {
 
   //Cambiar la logica
   //El swal es para la confirmacion de usuario
-  borrarArticulo(articulo: Articulo): void{
-    const index = this.getIndex(articulo);
-    console.log(index);
-    Swal.fire({
-      title: '¿Deseas eliminar este elemento de la tabla?',
-      text: "Esto no es reversible",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, yeet it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          //Modificar la logica aqui
-          this.articulos.splice(index, 1);
-        }
-      })
-      /*
-    if (confirm("¿Deseas eliminar este elemento de la tabla?")) {
-          this.articulos.splice(index, 1);
-    }*/
+  borrarArticulo(articulo: Articulo){
+    const index = articulo.Codigo;
+    // this.articulos.splice(index, 1);
+    return this.http.delete<Articulo>(this.baseURL+`/${index}`);
   }
 }

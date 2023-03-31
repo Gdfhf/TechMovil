@@ -31,16 +31,21 @@ export class TablaComponent {
     });
   }
 
-  borrarArticulo(articulo: Articulo): void{
-    this.articuloService.borrarArticulo(articulo);
+  borrarArticulo(articulo: Articulo){
+    const confirmacion = confirm(`¿Estas seguro de borrar el articulo? ${articulo.Descripcion}`)
+    if (confirmacion) {
+      // this.articulos = this.articulos.filter(a => a.idProductos != articulo.idProductos);
+      this.articuloService.borrarArticulo(articulo).subscribe(data => console.log(data));
+      this.articulos.splice(this.articulos.indexOf(articulo),1)
+    }
   }
-  
+
   seleccionarArticulo(articulo: Articulo): void{
     this.articuloSeleccionado = {
       ...articulo
     }
     this.router.navigate(["modificararticulo/" + articulo.Codigo]);
     //this.seleccion.emit(this.articuloSeleccionado);
-    
+
   }
 }
