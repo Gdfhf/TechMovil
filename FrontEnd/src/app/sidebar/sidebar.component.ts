@@ -9,7 +9,6 @@ export class SidebarComponent {
   isShown: boolean = false;
 
   mostrarSideBar(){
-    console.log("lol");
     this.isShown = !this.isShown;
   }
 }
