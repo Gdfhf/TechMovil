@@ -67,14 +67,22 @@ export class FormularioProveedoresComponent {
       return;
     }
 
-    this.proveedorService.agregarProveedor(this.proveedorSeleccionado).subscribe(data => {console.log(data)});;
-    this.regresar();
+    this.proveedorService.agregarProveedor(this.proveedorSeleccionado).subscribe(data => {
+      console.log(data)
+      Swal.fire(
+        'Proveedor agregado!',
+        '¡Se agregó el proveedor correctamente!',
+        'success'
+      )
+      this.limpiarCajas();
+      this.regresar();
+    });
   }
 
   modificarProveedor(){
     Swal.fire({
-      title: '¿Está seguro de modificar el articulo?',
-      text: "El id no puede ser modificado",
+      title: '¿Está seguro de modificar el proveedor?',
+      text: "Asegurese de tener los datos correctos",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -83,8 +91,15 @@ export class FormularioProveedoresComponent {
       }).then((result) => {
         if(result.isConfirmed) {
           console.log(this.proveedorMod,this.proveedorSeleccionado);
-          this.proveedorService.modificarArticulo(this.proveedorMod, this.proveedorSeleccionado).subscribe(data => {console.log(data)});
-          this.regresar();
+          this.proveedorService.modificarArticulo(this.proveedorMod, this.proveedorSeleccionado).subscribe(data => {
+            console.log(data)
+            this.regresar();
+            Swal.fire(
+              'Modificado!',
+              'El proveedor se modificó exitosamente.',
+              'success'
+            )
+          });
         }
       })
   }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Proveedor } from '../Interfaces/Proveedor';
 import { ProveedorService } from '../proveedor-service/proveedor-service';
 
@@ -38,11 +39,32 @@ export class TablaProveedoresComponent {
   }
 
   borrarProveedor(proveedor: Proveedor){
-    const confirmacion = confirm(`¿Estas seguro de borrar el proveedor? ${proveedor.CodigoProveedor}`)
-    if (confirmacion) {
+    Swal.fire({
+      title: '¿Deseas eliminar este elemento de la tabla?',
+      text: "Esto no es reversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, yeet it!'
+      }).then((result) => {
+        if(result.isConfirmed){
+          this.proveedorService.borrarArticulo(proveedor).subscribe(data => {
+            console.log(data)
+            this.proveedores.splice(this.proveedores.indexOf(proveedor),1)
+            Swal.fire(
+              'Proveedor eliminado',
+              '¡Se eliminó el proveedor correctamente!',
+              'success'
+            )  
+          });
+        }
+      });
+    //const confirmacion = confirm(`¿Estas seguro de borrar el proveedor? ${proveedor.CodigoProveedor}`)
+    //if (confirmacion) {
       // this.articulos = this.articulos.filter(a => a.idProductos != articulo.idProductos);
-      this.proveedorService.borrarArticulo(proveedor).subscribe(data => console.log(data));
-      this.proveedores.splice(this.proveedores.indexOf(proveedor),1)
-    }
+      //this.proveedorService.borrarArticulo(proveedor).subscribe(data => console.log(data));
+      //this.proveedores.splice(this.proveedores.indexOf(proveedor),1)
+    //}
   }
 }

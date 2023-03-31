@@ -63,10 +63,12 @@ export class FormularioComponent {
       return;
     }
     //else
+    /*
     this.articuloService.agregarArticulo({
     ...this.articuloSeleccionado
     });
-
+    */
+   
     this.articuloService.agregarArticulo( {...this.articuloSeleccionado }).subscribe(data => {
       Swal.fire(
         'Producto Agregado',
@@ -105,13 +107,13 @@ export class FormularioComponent {
           this.articuloService.modificarArticulo(this.articuloMod, this.articuloSeleccionado).subscribe(data => {console.log(data)});;
           this.limpiarCajas();
           this.regresar();
-          /*
+          
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            'Modificado!',
+            'El producto se modificó exitosamente.',
             'success'
           )
-          */
+          
         }
       })
   }
