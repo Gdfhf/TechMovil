@@ -43,7 +43,20 @@ export class FormularioProveedoresComponent {
   }
 
   agregarProveedor(){
-    this.proveedorService.agregarProveedor(this.proveedorSeleccionado);
+    if (this.proveedorSeleccionado.CodigoProveedor == 0 || this.proveedorSeleccionado.Direccion == '' || this.proveedorSeleccionado.Email == '' || this.proveedorSeleccionado.RazonSocial == '' || this.proveedorSeleccionado.Rfc == '') {
+      this.msgText = "Los campos están vacios.";
+      this.msgAlert = true;
+      return;
+    }
+
+    if (this.proveedorService.validacion(this.proveedorSeleccionado)) {
+      this.msgText = "El proveedor ya existe.";
+      this.msgAlert = true;
+      return;
+    }
+
+    this.proveedorService.agregarProveedor(this.proveedorSeleccionado).subscribe(data => {console.log(data)});;
+    this.regresar();
   }
 
   modificarProveedor(){

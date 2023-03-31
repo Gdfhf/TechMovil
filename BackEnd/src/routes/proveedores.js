@@ -21,10 +21,6 @@ router.get("/:id", async(req, res) => {
     }
 });
 
-
-
-
-
 router.post("/", async(req,res)=> {
     try{
         console.log(req);
@@ -55,7 +51,7 @@ router.delete("/:id", async(req, res)=>{
     try{
         const { id } = req.params;
         await models.proveedores.destroy({
-            where: { Id: id }
+            where: { CodigoProveedor: id }
         });
         res.json("Proveedor id: " +id+ ";Elimination Succesful");
     }catch(error){

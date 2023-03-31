@@ -34,10 +34,15 @@ export class TablaProveedoresComponent {
       ...proveedor
     }
     this.router.navigate(["modificarproveedor/" + proveedor.Id]);
-    
+
   }
 
   borrarProveedor(proveedor: Proveedor){
-    this.proveedorService.borrarArticulo(proveedor);
+    const confirmacion = confirm(`¿Estas seguro de borrar el proveedor? ${proveedor.CodigoProveedor}`)
+    if (confirmacion) {
+      // this.articulos = this.articulos.filter(a => a.idProductos != articulo.idProductos);
+      this.proveedorService.borrarArticulo(proveedor).subscribe(data => console.log(data));
+      this.proveedores.splice(this.proveedores.indexOf(proveedor),1)
+    }
   }
 }
