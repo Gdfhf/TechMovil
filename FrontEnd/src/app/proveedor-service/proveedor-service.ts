@@ -26,7 +26,7 @@ export class ProveedorService {
     Email: "prov2@gmail.com"
   }];
   proveedorURL: string = "http://localhost:3000/api/proveedores/";
-  
+
   constructor(private http : HttpClient) {
     //
   }
@@ -47,6 +47,7 @@ export class ProveedorService {
   agregarProveedor(proveedor: Proveedor){
     const headers = { 'Content-type': 'application/json' };
     const body = JSON.stringify(proveedor);
+    console.log(proveedor);
     this.http.post(this.proveedorURL,body,{'headers':headers});
     //Modificar la lógica
     console.log("agregarProveedor del servicse");
@@ -73,11 +74,11 @@ export class ProveedorService {
   modificarArticulo(proveedor : Proveedor){
     const headers = { 'Content-type': 'application/json' };
     const body = JSON.stringify(proveedor);
-    let modificar = this.http.put<Proveedor>(this.proveedorURL, body, {'headers':headers});
-    
+    return this.http.put<Proveedor>(this.proveedorURL, body, {'headers':headers});
+
     //Modificar la logica creo
     //const index = this.getIndex(proveedor);
-    //this.proveedores[index] = {...proveedor}  
+    //this.proveedores[index] = {...proveedor}
   }
 
   //Cambiar la logica

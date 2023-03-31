@@ -9,11 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class ArticulosService {
   articulos: Articulo[] = [
-    {Codigo: 1, Descripcion: 'Manzana', Precio: 13.50},
-    {Codigo: 2, Descripcion: 'Durazno', Precio: 26.20},
-    {Codigo: 3, Descripcion: 'Fresa', Precio: 43.90},
-    {Codigo: 4, Descripcion: 'Piña', Precio: 15.75},
-    {Codigo: 5, Descripcion: 'Uva', Precio: 34.76}
   ]
 
   baseURL:string = "http://localhost:3000/api/productos";
@@ -49,11 +44,14 @@ export class ArticulosService {
   }
 
   //Considerar si este realmente se ocupa
-  getIndex(articulo : Articulo): number{
+  getIndex(articulo: Articulo): number {
     let index = 0;
-    this.articulos.forEach(art => {
-      if(articulo.Codigo == art.Codigo){
-        index = this.articulos.indexOf(art);
+    console.log(this.articulos);
+    this.articulos.forEach(ar => {
+      console.log(ar);
+      console.log(articulo);
+      if (ar.Codigo === articulo.Codigo) {
+        index = this.articulos.indexOf(ar);
       }
     });
     return index;
@@ -62,13 +60,14 @@ export class ArticulosService {
   modificarArticulo(articulo : Articulo){
     //Modificar la logica aqui
     const index = this.getIndex(articulo);
-    this.articulos[index] = {...articulo}  
+    this.articulos[index] = {...articulo}
   }
 
   //Cambiar la logica
   //El swal es para la confirmacion de usuario
   borrarArticulo(articulo: Articulo): void{
     const index = this.getIndex(articulo);
+    console.log(index);
     Swal.fire({
       title: '¿Deseas eliminar este elemento de la tabla?',
       text: "Esto no es reversible",
